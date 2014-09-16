@@ -6,9 +6,9 @@ from django.contrib.gis import forms
 
 from rest_framework.filters import BaseFilterBackend
 from rest_framework.exceptions import ParseError
-from math import cos, pi 
+from rest_framework_gis.tilenames import tile_edges
 
-from .tilenames import tile_edges
+from math import cos, pi 
 
 try:
     import django_filters
@@ -112,7 +112,7 @@ class DistanceToPointFilter(BaseFilterBackend):
             (x,y) = (float(n) for n in point_string.split(','))
         except ValueError:
             raise ParseError("Not valid geometry string in parameter %s."
-                             % self.point_string)
+                             % point_string)
 
         p = Point(x,y)
         return p
